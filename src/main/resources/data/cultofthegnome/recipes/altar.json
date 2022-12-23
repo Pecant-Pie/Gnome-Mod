@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "SCS",
+    "SSS"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:light_weighted_pressure_plate"
+    },
+    "S": {
+      "item": "minecraft:smooth_stone"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    }
+  },
+  "result": {
+    "item": "cultofthegnome:altar"
+  }
+}
