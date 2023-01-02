@@ -10,6 +10,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.pecant.cultofthegnome.block.ModBlocks;
+import net.pecant.cultofthegnome.init.EntityInit;
 import net.pecant.cultofthegnome.item.ModItems;
 import org.slf4j.Logger;
 
@@ -26,7 +27,7 @@ public class CultOfTheGnome
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
-
+        EntityInit.ENTITIES.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);

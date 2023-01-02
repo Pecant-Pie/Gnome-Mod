@@ -24,7 +24,7 @@ public class ModCommonEvents {
 
     @SubscribeEvent
     public static void entityAttributes(EntityAttributeCreationEvent event) {
-        event.put(EntityInit.GNOME.get(), GnomeEntity.getAttributes().build());
+        event.put(EntityInit.GNOME.get(), GnomeEntity.getGnomeAttributes().build());
     }
 
 

@@ -12,6 +12,6 @@ import static net.minecraftforge.registries.ForgeRegistries.*;
 public class EntityInit {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ENTITY_TYPES, CultOfTheGnome.MOD_ID);
 
-    public static final RegistryObject<EntityType<GnomeEntity>> GNOME = ENTITIES.register("gnome", () -> EntityType.Builder.of(GnomeEntity::new, MobCategory.CREATURE).sized(1,1).build(CultOfTheGnome.MOD_ID + ":gnome"));
+    public static final RegistryObject<EntityType<GnomeEntity>> GNOME = ENTITIES.register("gnome", () -> EntityType.Builder.of(GnomeEntity::new, MobCategory.CREATURE).sized(0.25f,0.625f).build(CultOfTheGnome.MOD_ID + ":gnome"));
 
 }
