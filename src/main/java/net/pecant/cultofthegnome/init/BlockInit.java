@@ -1,4 +1,4 @@
-package net.pecant.cultofthegnome.block;
+package net.pecant.cultofthegnome.init;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -12,11 +12,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.pecant.cultofthegnome.CultOfTheGnome;
 import net.pecant.cultofthegnome.item.ModCreativeModeTab;
-import net.pecant.cultofthegnome.item.ModItems;
 
 import java.util.function.Supplier;
 
-public class ModBlocks {
+public class BlockInit {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, CultOfTheGnome.MOD_ID);
 
@@ -36,7 +35,7 @@ public class ModBlocks {
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block,
                                                                             CreativeModeTab tab){
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
+        return ItemInit.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
     }
 
     public static void register(IEventBus eventBus) {

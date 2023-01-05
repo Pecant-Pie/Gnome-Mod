@@ -9,9 +9,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.pecant.cultofthegnome.block.ModBlocks;
+import net.pecant.cultofthegnome.init.BlockInit;
 import net.pecant.cultofthegnome.init.EntityInit;
-import net.pecant.cultofthegnome.item.ModItems;
+import net.pecant.cultofthegnome.init.ItemInit;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -25,8 +25,8 @@ public class CultOfTheGnome
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItems.register(modEventBus);
-        ModBlocks.register(modEventBus);
+        ItemInit.register(modEventBus);
+        BlockInit.register(modEventBus);
         EntityInit.ENTITIES.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
 
