@@ -16,10 +16,10 @@ public class ModCommonEvents {
     // This event is used for adding spawn placements for an entity
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            SpawnPlacements.register(EntityInit.GNOME.get(), SpawnPlacements.Type.ON_GROUND,
-                    Heightmap.Types.WORLD_SURFACE, GnomeEntity::canSpawn);
-        });
+//        event.enqueueWork(() -> {
+//            SpawnPlacements.register(EntityInit.GNOME.get(), SpawnPlacements.Type.ON_GROUND,
+//                    Heightmap.Types.WORLD_SURFACE, GnomeEntity::canSpawn);
+//        });
     }
 
     @SubscribeEvent

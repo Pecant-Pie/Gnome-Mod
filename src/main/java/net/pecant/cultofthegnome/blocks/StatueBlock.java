@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -51,7 +52,7 @@ public class StatueBlock extends Block implements EntityBlock {
         if (!level.isClientSide) {
 
             ItemStack heldItem = player.getItemInHand(hand);
-            if (heldItem.is(ItemInit.HAT.get())) {
+            if (heldItem.is(ItemInit.HAT.get()) && getGnomes(state) < MAX_GNOMES && !player.isInvulnerable()) {
 
                 if (!player.getAbilities().instabuild) {
                     heldItem.shrink(1);
@@ -64,11 +65,34 @@ public class StatueBlock extends Block implements EntityBlock {
                 var gnome = new GnomeEntity(EntityInit.GNOME.get(), level);
                 Vec3 hitVector = hitResult.getLocation();
                 gnome.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
-                level.addFreshEntity(gnome);
+
+                if (addGnome(state, level, pos, gnome)) {
+                    level.addFreshEntity(gnome);
+                }
             }
 
         }
 
         return InteractionResult.sidedSuccess(level.isClientSide());
+    }
+
+    // Increments the blockstate gnome count and adds the Statue block entity to the gnome's 'statue' field
+    public boolean addGnome(BlockState state, Level level, BlockPos pos, GnomeEntity gnome) {
+        if (getGnomes(state) < MAX_GNOMES && gnome.setStatue(level.getBlockEntity(pos), pos))
+        {
+            level.setBlock(pos, state.setValue(GNOMES, getGnomes(state) + 1), 3);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public int getGnomes(BlockState state) {
+        return state.getValue(GNOMES);
+    }
+
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(GNOMES);
     }
 }

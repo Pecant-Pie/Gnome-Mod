@@ -10,20 +10,27 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraftforge.common.ForgeMod;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.pecant.cultofthegnome.blockentities.StatueBlockEntity;
 
 public class GnomeEntity extends PathfinderMob {
 
     private static final Ingredient FOLLOW_ITEMS = Ingredient.of(Items.GOLD_INGOT, Items.IRON_INGOT, Items.DIAMOND, Items.COPPER_INGOT);
+    private StatueBlockEntity statue;
+    private BlockPos statuePos;
 
-
-    public GnomeEntity(EntityType<? extends PathfinderMob> type, Level level) {
+    public GnomeEntity(EntityType<? extends GnomeEntity> type, Level level) {
         super(type, level);
+        this.statue = null;
     }
+
+//    public GnomeEntity(EntityType<? extends PathfinderMob> type, Level level, StatueBlockEntity statue) {
+//        super(type, level);
+//        this.statue = statue;
+//    }
 
 
     @Override
@@ -38,11 +45,16 @@ public class GnomeEntity extends PathfinderMob {
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
     }
 
-    public static <T extends Mob> boolean canSpawn(EntityType<T> tEntityType, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
-        return true; // TODO: add a helper function that searches for a gnome statue within 5 blocks and returns true if one is found.
-    }
-
     public static AttributeSupplier.Builder getGnomeAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20f).add(Attributes.MOVEMENT_SPEED, 0.25D);
+    }
+
+    public boolean setStatue(BlockEntity blockEntity, BlockPos pos) {
+        if (blockEntity instanceof StatueBlockEntity statue) {
+            this.statue = statue;
+            this.statuePos = pos;
+            return true;
+        }
+        else return false;
     }
 }
