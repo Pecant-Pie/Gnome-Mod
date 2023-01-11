@@ -1,4 +1,4 @@
-# Gnome Mod
+# Cult of the Gnome | Mod for Minecraft 1.19.2 
 A mod for minecraft that adds Gnome Cults!
 
 ## Current Features
