@@ -1,4 +1,4 @@
-# Gnome-Mod
+# Gnome Mod
 A mod for minecraft that adds Gnome Cults!
 
 ## Current Features
