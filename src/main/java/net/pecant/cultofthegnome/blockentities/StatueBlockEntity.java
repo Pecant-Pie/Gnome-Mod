@@ -2,11 +2,20 @@ package net.pecant.cultofthegnome.blockentities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.entity.EntityTypeTest;
+import net.minecraft.world.phys.AABB;
+import net.minecraftforge.common.ForgeConfig;
 import net.pecant.cultofthegnome.blocks.StatueBlock;
 import net.pecant.cultofthegnome.entities.GnomeEntity;
 import net.pecant.cultofthegnome.init.BlockEntityInit;
+import net.pecant.cultofthegnome.init.EntityInit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,5 +91,22 @@ public class StatueBlockEntity extends BlockEntity {
     }
 
 
+    // Kills all gnomes and updates the blockstate accordingly.
+    // This took me three hours and I hate it.
+    public void cullGnomes(Player player) {
+        double MAX_DISTANCE = 32;
+        BlockPos pos = getBlockPos();
+        for (Entity entity: level.getEntities(player,
+                new AABB(pos.getX() - MAX_DISTANCE, pos.getY() - MAX_DISTANCE, pos.getZ() - MAX_DISTANCE,
+                        pos.getX() + MAX_DISTANCE, pos.getY() + MAX_DISTANCE, pos.getZ() + MAX_DISTANCE),
+                (entity) ->
+                  (gnomes.contains(entity.getUUID()))
+                )) {
+            GnomeEntity gnome = (GnomeEntity) entity;
+            gnome.kill();
+            gnomes.remove(gnome.getUUID());
+        }
+        updateBlockState();
+    }
 
 }
