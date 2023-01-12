@@ -4,26 +4,23 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+
 import net.pecant.cultofthegnome.entities.GnomeEntity;
 import net.pecant.cultofthegnome.init.BlockEntityInit;
 import net.pecant.cultofthegnome.init.EntityInit;
 import net.pecant.cultofthegnome.init.ItemInit;
+
 import org.jetbrains.annotations.Nullable;
 
 public class StatueBlock extends Block implements EntityBlock {
@@ -52,6 +49,7 @@ public class StatueBlock extends Block implements EntityBlock {
         if (!level.isClientSide) {
 
             ItemStack heldItem = player.getItemInHand(hand);
+            // Check if the held item is a hat, the player is not still invulnerable from being hit, and that it's not maxed out on gnomes
             if (heldItem.is(ItemInit.HAT.get()) && getGnomes(state) < MAX_GNOMES && !player.isInvulnerable()) {
 
                 if (!player.getAbilities().instabuild) {
@@ -77,9 +75,13 @@ public class StatueBlock extends Block implements EntityBlock {
     }
 
     // Increments the blockstate gnome count and adds the Statue block entity to the gnome's 'statue' field
+    // Also adds the gnome to the block entity's list within the setStatue method
     public boolean addGnome(BlockState state, Level level, BlockPos pos, GnomeEntity gnome) {
+
+        // sets the gnome statue stuff within the if condition
         if (getGnomes(state) < MAX_GNOMES && gnome.setStatue(level.getBlockEntity(pos), pos))
         {
+            gnome.setId(getGnomes(state)); // sets the gnome id to the previous count
             level.setBlock(pos, state.setValue(GNOMES, getGnomes(state) + 1), 3);
             return true;
         }

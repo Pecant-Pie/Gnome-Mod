@@ -2,7 +2,6 @@ package net.pecant.cultofthegnome.entities;
 
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.*;
 
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -27,11 +26,6 @@ public class GnomeEntity extends PathfinderMob {
         this.statue = null;
     }
 
-//    public GnomeEntity(EntityType<? extends PathfinderMob> type, Level level, StatueBlockEntity statue) {
-//        super(type, level);
-//        this.statue = statue;
-//    }
-
 
     @Override
     protected void registerGoals() {
@@ -53,6 +47,7 @@ public class GnomeEntity extends PathfinderMob {
         if (blockEntity instanceof StatueBlockEntity statue) {
             this.statue = statue;
             this.statuePos = pos;
+            statue.addGnome(this);
             return true;
         }
         else return false;
