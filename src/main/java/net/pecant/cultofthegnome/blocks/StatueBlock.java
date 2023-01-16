@@ -47,6 +47,7 @@ public class StatueBlock extends Block implements EntityBlock {
 //        return EntityBlock.super.getTicker(p_153212_, p_153213_, p_153214_);
 //    }
 
+    // TODO: FIX CLIENT/SERVER DESYNC BUG
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!level.isClientSide) {
@@ -62,7 +63,7 @@ public class StatueBlock extends Block implements EntityBlock {
                 // Steal some life away to give to the gnome
                 player.hurt(DamageSource.MAGIC, 2);
 
-                // Summon a gnome offset 1 block from where the statue was clicked
+                // Summon a gnome on top of the statue block
                 var gnome = new GnomeEntity(EntityInit.GNOME.get(), level);
                 Vec3 hitVector = hitResult.getLocation();
                 gnome.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
@@ -103,15 +104,17 @@ public class StatueBlock extends Block implements EntityBlock {
     }
 
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-//        if (!level.isClientSide()) {
+        super.playerWillDestroy(level, pos, state, player);
+
+        if (!level.isClientSide()) {
 
         if (level.getBlockEntity(pos) instanceof StatueBlockEntity statue) {
             statue.cullGnomes(player);
         }
 
 
-//        }
+        }
 
-        super.playerWillDestroy(level, pos, state, player);
+
     }
 }

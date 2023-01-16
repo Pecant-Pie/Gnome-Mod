@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.entity.EntityTypeTest;
@@ -15,6 +16,7 @@ import net.minecraftforge.common.ForgeConfig;
 import net.pecant.cultofthegnome.blocks.StatueBlock;
 import net.pecant.cultofthegnome.entities.GnomeEntity;
 import net.pecant.cultofthegnome.init.BlockEntityInit;
+import net.pecant.cultofthegnome.init.BlockInit;
 import net.pecant.cultofthegnome.init.EntityInit;
 
 import java.util.ArrayList;
@@ -54,7 +56,7 @@ public class StatueBlockEntity extends BlockEntity {
 
     public int updateBlockState() {
         int numGnomes = gnomes.size();
-        if (level != null)
+        if (level != null && this.level.getBlockState(this.getBlockPos()).is(BlockInit.STATUE.get()))
             this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(StatueBlock.GNOMES, numGnomes), 3);
         return numGnomes;
     }
