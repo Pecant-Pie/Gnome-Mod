@@ -77,7 +77,7 @@ public class StatueBlock extends Block implements EntityBlock {
                 return InteractionResult.SUCCESS;
         }
 
-        return InteractionResult.PASS;
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     // Increments the blockstate gnome count and adds the Statue block entity to the gnome's 'statue' field
@@ -109,7 +109,7 @@ public class StatueBlock extends Block implements EntityBlock {
         if (!level.isClientSide()) {
 
         if (level.getBlockEntity(pos) instanceof StatueBlockEntity statue) {
-            statue.cullGnomes(player);
+            statue.cullGnomes();
         }
 
 

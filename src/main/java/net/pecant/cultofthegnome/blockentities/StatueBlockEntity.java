@@ -28,6 +28,7 @@ public class StatueBlockEntity extends BlockEntity {
 
     private static int MAX_CAPACITY = StatueBlock.MAX_GNOMES;
     private static String gnomeNBTPrefix = "gnome_";
+    private static int MAX_DISTANCE = 32;
     private ArrayList<UUID> gnomes;
 
     public StatueBlockEntity(BlockPos pos, BlockState state) {
@@ -78,6 +79,9 @@ public class StatueBlockEntity extends BlockEntity {
                 gnomes.add(id);
         }
 
+        // This makes sure the gnomes bound to this statue are still bound when the statue is loaded in.
+//        claimGnomes();
+
         // Any gnomes that failed to load will no longer count toward the statue's maximum.
         updateBlockState();
     }
@@ -95,10 +99,9 @@ public class StatueBlockEntity extends BlockEntity {
 
     // Kills all gnomes and updates the blockstate accordingly.
     // This took me three hours and I hate it.
-    public void cullGnomes(Player player) {
-        double MAX_DISTANCE = 32;
+    public void cullGnomes() {
         BlockPos pos = getBlockPos();
-        for (Entity entity: level.getEntities(player,
+        for (Entity entity: level.getEntities((Player)null,
                 new AABB(pos.getX() - MAX_DISTANCE, pos.getY() - MAX_DISTANCE, pos.getZ() - MAX_DISTANCE,
                         pos.getX() + MAX_DISTANCE, pos.getY() + MAX_DISTANCE, pos.getZ() + MAX_DISTANCE),
                 (entity) ->
@@ -109,6 +112,19 @@ public class StatueBlockEntity extends BlockEntity {
             gnomes.remove(gnome.getUUID());
         }
         updateBlockState();
+    }
+
+    public void claimGnomes() {
+        BlockPos pos = getBlockPos();
+        for (Entity entity: level.getEntities((Player)null,
+                new AABB(pos.getX() - MAX_DISTANCE, pos.getY() - MAX_DISTANCE, pos.getZ() - MAX_DISTANCE,
+                        pos.getX() + MAX_DISTANCE, pos.getY() + MAX_DISTANCE, pos.getZ() + MAX_DISTANCE),
+                (entity) ->
+                        (gnomes.contains(entity.getUUID()))
+        )) {
+            GnomeEntity gnome = (GnomeEntity) entity;
+            gnome.setStatue(this, pos);
+        }
     }
 
 }
