@@ -11,11 +11,13 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.pecant.cultofthegnome.blockentities.StatueBlockEntity;
+import net.pecant.cultofthegnome.entities.ai.ApproachStatueGoal;
 import net.pecant.cultofthegnome.init.BlockInit;
 import net.pecant.cultofthegnome.init.ItemInit;
 
@@ -39,6 +41,7 @@ public class GnomeEntity extends PathfinderMob {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.5D));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, FOLLOW_ITEMS, false));
+        this.goalSelector.addGoal(3, new ApproachStatueGoal(this, 1.0D, 10, 5));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -58,14 +61,7 @@ public class GnomeEntity extends PathfinderMob {
         else return false;
     }
 
-//    @Override
-//    public void onRemovedFromWorld() {
-//        if (this.statue != null)
-//            statue.removeGnome(this);
-//        super.onRemovedFromWorld();
-//    }
 
-    // TODO: MAKE GNOMES REMEMBER THEIR STATUE ON UNLOAD/LOAD
     @Override
     public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
@@ -102,6 +98,10 @@ public class GnomeEntity extends PathfinderMob {
 
         if (this.statue != null)
             statue.removeGnome(this);
+    }
+
+    public BlockPos getStatuePos() {
+        return statuePos;
     }
 
 }

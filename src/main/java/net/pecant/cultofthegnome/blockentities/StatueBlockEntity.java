@@ -79,8 +79,6 @@ public class StatueBlockEntity extends BlockEntity {
                 gnomes.add(id);
         }
 
-        // This makes sure the gnomes bound to this statue are still bound when the statue is loaded in.
-//        claimGnomes();
 
         // Any gnomes that failed to load will no longer count toward the statue's maximum.
         updateBlockState();

@@ -47,7 +47,6 @@ public class StatueBlock extends Block implements EntityBlock {
 //        return EntityBlock.super.getTicker(p_153212_, p_153213_, p_153214_);
 //    }
 
-    // TODO: FIX CLIENT/SERVER DESYNC BUG
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!level.isClientSide) {
