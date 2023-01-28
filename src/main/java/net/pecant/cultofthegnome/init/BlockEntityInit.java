@@ -5,6 +5,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.pecant.cultofthegnome.CultOfTheGnome;
+import net.pecant.cultofthegnome.blockentities.AltarBlockEntity;
 import net.pecant.cultofthegnome.blockentities.StatueBlockEntity;
 
 public class BlockEntityInit {
@@ -14,4 +15,6 @@ public class BlockEntityInit {
     public static final RegistryObject<BlockEntityType<StatueBlockEntity>> STATUE = BLOCK_ENTITIES.register("statue",
             () -> BlockEntityType.Builder.of(StatueBlockEntity::new, BlockInit.STATUE.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<AltarBlockEntity>> ALTAR = BLOCK_ENTITIES.register("altar",
+            () -> BlockEntityType.Builder.of(AltarBlockEntity::new, BlockInit.ALTAR.get()).build(null));
 }

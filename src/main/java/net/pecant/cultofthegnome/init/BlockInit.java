@@ -11,6 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.pecant.cultofthegnome.CultOfTheGnome;
+import net.pecant.cultofthegnome.blocks.AltarBlock;
 import net.pecant.cultofthegnome.blocks.StatueBlock;
 import net.pecant.cultofthegnome.item.ModCreativeModeTab;
 
@@ -25,8 +26,8 @@ public class BlockInit {
             () -> new StatueBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3f).requiresCorrectToolForDrops()), ModCreativeModeTab.GNOME_TAB);
 
     // Altar
-    public static final RegistryObject<Block> ALTAR = registerBlock("altar",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE).strength(3f).requiresCorrectToolForDrops()), ModCreativeModeTab.GNOME_TAB);
+    public static final RegistryObject<AltarBlock> ALTAR = registerBlock("altar",
+            () -> new AltarBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3f).requiresCorrectToolForDrops()), ModCreativeModeTab.GNOME_TAB);
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
