@@ -32,20 +32,17 @@ public class AltarBlockEntity extends RandomizableContainerBlockEntity {
     public AltarBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityInit.ALTAR.get(), pos, state);
     }
-
-    // TODO: Make these proper strings tied to en_us.json
     @Override
     public Component getDisplayName() {
-        return Component.literal("Offering Altar");
+        return Component.translatable("block.cultofthegnome.altar");
     }
 
     @Override
     protected Component getDefaultName() {
-        return Component.literal("Offering Altar");
+        return Component.translatable("block.cultofthegnome.altar");
     }
 
 
-    // TODO: finish and watch this video : https://youtu.be/jo0BTisGpJk to help.
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory) {

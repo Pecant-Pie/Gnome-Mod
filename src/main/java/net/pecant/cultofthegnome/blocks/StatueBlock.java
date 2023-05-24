@@ -50,7 +50,6 @@ public class StatueBlock extends Block implements EntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!level.isClientSide) {
-
             ItemStack heldItem = player.getItemInHand(hand);
             // Check if the held item is a hat, the player is not still invulnerable from being hit, and that it's not maxed out on gnomes
             if (heldItem.is(ItemInit.HAT.get()) && getGnomes(state) < MAX_GNOMES && !player.isInvulnerable()) {
@@ -76,7 +75,7 @@ public class StatueBlock extends Block implements EntityBlock {
                 return InteractionResult.SUCCESS;
         }
 
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     // Increments the blockstate gnome count and adds the Statue block entity to the gnome's 'statue' field

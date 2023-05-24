@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 public class CultOfTheGnome
 {
     public static final String MOD_ID = "cultofthegnome";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public CultOfTheGnome()
     {

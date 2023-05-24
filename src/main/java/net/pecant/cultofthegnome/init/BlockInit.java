@@ -21,7 +21,7 @@ public class BlockInit {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, CultOfTheGnome.MOD_ID);
 
-    // Gnome
+    // Gnome statue
     public static final RegistryObject<StatueBlock> STATUE = registerBlock("statue",
             () -> new StatueBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3f).requiresCorrectToolForDrops()), ModCreativeModeTab.GNOME_TAB);
 

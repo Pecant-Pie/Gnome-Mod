@@ -3,7 +3,6 @@ package net.pecant.cultofthegnome.entities.ai;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.pecant.cultofthegnome.entities.GnomeEntity;
 
 public class ApproachStatueGoal extends MoveToBlockGoal {
@@ -36,7 +35,14 @@ public class ApproachStatueGoal extends MoveToBlockGoal {
 
     @Override
     public boolean canUse() {
-        return gnome.blockPosition().distManhattan(gnome.getStatuePos()) > maxDistance;
+        if (gnome.getRandom().nextInt(20) == 0) {
+            int dist = gnome.blockPosition().distManhattan(gnome.getStatuePos()); // get distance from statue
+            return gnome.getRandom().nextInt(dist * dist) > 100 || !gnome.getMainHandItem().isEmpty();
+        }
+        else return false;
+//        return (gnome.getRandom().nextInt(50) != 0) && // Works 1 out of every 50 ticks
+//                gnome.blockPosition().distManhattan(gnome.getStatuePos()) > maxDistance || // If the gnome is too far
+//                !gnome.getMainHandItem().isEmpty(); // or if the gnome is holding an item
     }
 
     @Override
