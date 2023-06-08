@@ -49,33 +49,33 @@ public class StatueBlock extends Block implements EntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (!level.isClientSide) {
-            ItemStack heldItem = player.getItemInHand(hand);
-            // Check if the held item is a hat, the player is not still invulnerable from being hit, and that it's not maxed out on gnomes
-            if (heldItem.is(ItemInit.HAT.get()) && getGnomes(state) < MAX_GNOMES && !player.isInvulnerable()) {
 
+        ItemStack heldItem = player.getItemInHand(hand);
+        // Check if the held item is a hat, the player is not still invulnerable from being hit, and that it's not maxed out on gnomes
+        if (heldItem.is(ItemInit.HAT.get()) && getGnomes(state) < MAX_GNOMES && !player.isInvulnerable()) {
+
+            if (!level.isClientSide) {
                 if (!player.isCreative()) {
                     heldItem.shrink(1);
                 }
-
                 // Steal some life away to give to the gnome
                 player.hurt(DamageSource.MAGIC, 2);
-
-                // Summon a gnome on top of the statue block
-                var gnome = new GnomeEntity(EntityInit.GNOME.get(), level);
-                Vec3 hitVector = hitResult.getLocation();
-                gnome.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
-
-                if (addGnome(state, level, pos, gnome)) {
-                    level.addFreshEntity(gnome);
-                }
-                return InteractionResult.CONSUME;
             }
-            else
-                return InteractionResult.SUCCESS;
+
+            // Summon a gnome on top of the statue block
+            var gnome = new GnomeEntity(EntityInit.GNOME.get(), level);
+            Vec3 hitVector = hitResult.getLocation();
+            gnome.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+
+            if (addGnome(state, level, pos, gnome)) {
+                level.addFreshEntity(gnome);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        else {
+            return InteractionResult.PASS;
         }
 
-        return InteractionResult.SUCCESS;
     }
 
     // Increments the blockstate gnome count and adds the Statue block entity to the gnome's 'statue' field
