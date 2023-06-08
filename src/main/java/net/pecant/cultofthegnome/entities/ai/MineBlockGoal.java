@@ -84,6 +84,9 @@ public class MineBlockGoal extends MoveToBlockGoal {
                 if (gnome.getMainHandItem().isEmpty()) {
                     // First stack in the drops list goes into the gnomes hand
                     ItemStack pickup = drops.remove(0);
+
+                    // Gnomes are very precise miners, so double the drops
+                    pickup.setCount(pickup.getCount() * 2);
                     gnome.setItemInHand(InteractionHand.MAIN_HAND, pickup);
                 }
                 // Everything else drops normally from the block.
@@ -93,5 +96,7 @@ public class MineBlockGoal extends MoveToBlockGoal {
             }
         }
     }
+
+
 
 }
