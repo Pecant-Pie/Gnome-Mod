@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " H ",
+    "SDS",
+    "SSS"
+  ],
+  "key": {
+    "H": {
+      "item": "cultofthegnome:hat"
+    },
+    "S": {
+      "item": "minecraft:smooth_stone"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "cultofthegnome:statue"
+  }
+}
