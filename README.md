@@ -7,7 +7,9 @@ A mod for minecraft that adds Gnome Cults!
 - Gnome Statue and Offering Altar (blocks)
 - Gnome hat (item)
 - Gnomes that you can spawn by right clicking the statue block with a hat.
-
+- The gnomes mine nearby ores and drop the items off at a nearby altar.
+- Note: Gnomes are bound to their statue, and breaking the statue will kill all bound gnomes.
+- Each Statue may have a maximum of 5 gnomes bound it at once. If a gnome dies, another may be spawned at the altar in its place.
 ## Planned Features for Initial Release
 
 - Three distinct statues that each spawn a unique type of gnome: Miner, Farmer, Logger.
