@@ -14,6 +14,6 @@ public class EntityInit {
 
 //    public static final MobCategory gnomes = new MobCategory("gnomes", 10, true, true, 128);
     public static final RegistryObject<EntityType<GnomeEntity>> GNOME = ENTITIES.register("gnome", () -> EntityType.Builder.of(GnomeEntity::new,
-        MobCategory.MISC).sized(0.25f,0.625f).build(CultOfTheGnome.MOD_ID + ":gnome"));
+        MobCategory.MISC).sized(0.25f,0.625f).clientTrackingRange(10).build(CultOfTheGnome.MOD_ID + ":gnome"));
 
 }

@@ -155,4 +155,10 @@ public class GnomeEntity extends PathfinderMob {
         }
         return false;
     }
+
+    @Override
+    public boolean removeWhenFarAway(double something){
+        return false;
+    }
+
 }
