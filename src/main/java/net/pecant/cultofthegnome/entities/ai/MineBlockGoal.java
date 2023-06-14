@@ -11,6 +11,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
+import net.minecraftforge.common.Tags;
 import net.pecant.cultofthegnome.entities.GnomeEntity;
 
 import java.util.List;
@@ -85,8 +86,10 @@ public class MineBlockGoal extends MoveToBlockGoal {
                     // First stack in the drops list goes into the gnomes hand
                     ItemStack pickup = drops.remove(0);
 
-                    // Gnomes are very precise miners, so double the drops
-                    pickup.setCount(pickup.getCount() * 2);
+                    // Gnomes are very precise miners, so double the drops if it's not itself an ore
+                    if (!pickup.is(Tags.Items.ORES))
+                        pickup.setCount(pickup.getCount() * 2);
+
                     gnome.setItemInHand(InteractionHand.MAIN_HAND, pickup);
                 }
                 // Everything else drops normally from the block.
