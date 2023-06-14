@@ -4,22 +4,27 @@ A mod for minecraft that adds Gnome Cults!
 
 ## Current Features
 
-- Gnome Statue and Offering Altar (blocks)
-- Gnome hat (item)
-- Gnomes that you can spawn by right clicking the statue block with a hat.
-- The gnomes mine nearby ores and drop the items off at a nearby altar.
-- Note: Gnomes are bound to their statue, and breaking the statue will kill all bound gnomes.
+- Gnome Statue and Offering Altar (blocks).
+- Gnome hat (item).
+- Recipes for all items/blocks.
+- Gnomes that you can spawn by right clicking the statue block with a hat (this makes you take 1 heart of magic damage).
+- The gnomes mine nearby ores and drop the items off above a nearby altar.
+- Gnomes are bound to their statue, and breaking the statue will kill all bound gnomes.
 - Each Statue may have a maximum of 5 gnomes bound it at once. If a gnome dies, another may be spawned at the altar in its place.
+- Gnomes get double the drops from mining ores. Note that this is less drops (on average) than mining with a fortune 3 pickaxe.
+
 ## Planned Features for Initial Release
 
-- Three distinct statues that each spawn a unique type of gnome: Miner, Farmer, Logger.
-- Gnomes that do a task and then bring items from the completed task to the offering altar.
-- Proper 3D assets for the statues and altar.
-- Randomized names for the gnomes.
-- Unique appearances for the different types of gnomes.
+- Proper 3D assets for the statue and altar.
+- Make the gnomes try to place their items directly into the altar's inventory.
+
 
 ## Further Development
 
+- Randomized names for the gnomes.
+- Unique appearances for the different types of gnomes.
+- Three distinct statues that each spawn a unique type of gnome: Miner, Farmer, Logger.
+- Mining gnome revamp that makes them more useful as a stationary cult.
 - Faith system, where you can build certain structures or bestow gifts upon your gnomes to increase their productivity.
 - Animations for praying at the statue or altar would be nice.
 - A type of gnome that is loyal to you, not a statue, and can be directed to attack mobs or players.
