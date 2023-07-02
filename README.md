@@ -1,11 +1,11 @@
 # Cult of the Gnome | Mod for Minecraft 1.19.2 
 A mod for minecraft that adds Gnome Cults! 
-(they're not really cults, I just like the name)
 
 ## Current Features
 
-- Gnome Statue and Offering Altar (blocks).
-- Gnome hat (item).
+- Nice 3D Gnome Statue
+- Offering Altar
+- Gnome hat (item)
 - Recipes for all items/blocks.
 - Gnomes that you can spawn by right clicking the statue block with a hat (this makes you take 1 heart of magic damage).
 - The gnomes mine nearby ores and drop the items off above a nearby altar.
@@ -15,15 +15,14 @@ A mod for minecraft that adds Gnome Cults!
 
 ## Planned Features for Initial Release
 
-- Proper 3D assets for the statue and altar.
-- Make the gnomes try to place their items directly into the altar's inventory.
+- Proper 3D assets for the altar.
+- The gnomes place their items directly into the altar's inventory.
 
-
-## Further Development
+## Ideas for Further Development
 
 - Randomized names for the gnomes.
-- Unique appearances for the different types of gnomes.
 - Three distinct statues that each spawn a unique type of gnome: Miner, Farmer, Logger.
+- Unique appearances for the different types of gnomes.
 - Mining gnome revamp that makes them more useful as a stationary cult.
 - Faith system, where you can build certain structures or bestow gifts upon your gnomes to increase their productivity.
 - Animations for praying at the statue or altar would be nice.
