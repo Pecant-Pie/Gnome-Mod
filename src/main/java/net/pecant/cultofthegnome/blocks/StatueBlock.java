@@ -22,6 +22,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.pecant.cultofthegnome.CultOfTheGnome;
 import net.pecant.cultofthegnome.blockentities.StatueBlockEntity;
 import net.pecant.cultofthegnome.entities.GnomeEntity;
 import net.pecant.cultofthegnome.init.BlockEntityInit;
@@ -62,25 +63,29 @@ public class StatueBlock extends Block implements EntityBlock {
 
         ItemStack heldItem = player.getItemInHand(hand);
         // Check if the held item is a hat, the player is not still invulnerable from being hit, and that it's not maxed out on gnomes
-        if (heldItem.is(ItemInit.HAT.get()) && getGnomes(state) < MAX_GNOMES && !player.isInvulnerable()) {
+        if (heldItem.is(ItemInit.HAT.get()) && getGnomes(state) < MAX_GNOMES) {
+            // Steal some life away to give to the gnome
+            boolean hurt = player.hurt(DamageSource.MAGIC, 2) || player.isCreative();
 
             if (!level.isClientSide) {
-                if (!player.isCreative()) {
+
+                if (!player.isCreative() && hurt) {
                     heldItem.shrink(1);
                 }
-                // Steal some life away to give to the gnome
-                player.hurt(DamageSource.MAGIC, 2);
             }
 
-            // Summon a gnome on top of the statue block
-            var gnome = new GnomeEntity(EntityInit.GNOME.get(), level);
-            Vec3 hitVector = hitResult.getLocation();
-            gnome.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+            if (hurt) {
+                // Summon a gnome on top of the statue block
+                var gnome = new GnomeEntity(EntityInit.GNOME.get(), level);
+                Vec3 hitVector = hitResult.getLocation();
+                gnome.setPos(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
 
-            if (addGnome(state, level, pos, gnome)) {
-                level.addFreshEntity(gnome);
+                if (addGnome(state, level, pos, gnome)) {
+                    level.addFreshEntity(gnome);
+                }
+                return InteractionResult.sidedSuccess(level.isClientSide);
             }
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            else return InteractionResult.FAIL;
         }
         else {
             return InteractionResult.PASS;
