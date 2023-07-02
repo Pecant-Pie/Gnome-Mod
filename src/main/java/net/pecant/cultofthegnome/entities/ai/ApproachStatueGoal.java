@@ -37,7 +37,7 @@ public class ApproachStatueGoal extends MoveToBlockGoal {
     public boolean canUse() {
         if (gnome.getRandom().nextInt(20) == 0) {
             int dist = gnome.blockPosition().distManhattan(gnome.getStatuePos()); // get distance from statue
-            return gnome.getRandom().nextInt(dist * dist) > 100 || !gnome.getMainHandItem().isEmpty();
+            return gnome.getRandom().nextInt(dist * dist + 1) > 100 || !gnome.getMainHandItem().isEmpty();
         }
         else return false;
 //        return (gnome.getRandom().nextInt(50) != 0) && // Works 1 out of every 50 ticks
