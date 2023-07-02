@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -18,6 +19,9 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.pecant.cultofthegnome.blockentities.StatueBlockEntity;
 import net.pecant.cultofthegnome.entities.GnomeEntity;
 import net.pecant.cultofthegnome.init.BlockEntityInit;
@@ -31,10 +35,16 @@ public class StatueBlock extends Block implements EntityBlock {
     public static final int MIN_GNOMES = 0;
 
     public static final IntegerProperty GNOMES = IntegerProperty.create("gnomes", MIN_GNOMES, MAX_GNOMES);
+
+    private static final VoxelShape SHAPE = Block.box(4,0,4,12,16,12);
     public StatueBlock(Properties prop) {
         super(prop);
     }
 
+    @Override
+    public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
+        return SHAPE;
+    }
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {

@@ -23,11 +23,12 @@ public class BlockInit {
 
     // Gnome statue
     public static final RegistryObject<StatueBlock> STATUE = registerBlock("statue",
-            () -> new StatueBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3f).requiresCorrectToolForDrops()), ModCreativeModeTab.GNOME_TAB);
+            () -> new StatueBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3f).requiresCorrectToolForDrops()
+                    .noOcclusion()), ModCreativeModeTab.GNOME_TAB);
 
     // Altar
     public static final RegistryObject<AltarBlock> ALTAR = registerBlock("altar",
-            () -> new AltarBlock(BlockBehaviour.Properties.of(Material.STONE).strength(3f).requiresCorrectToolForDrops()), ModCreativeModeTab.GNOME_TAB);
+            () -> new AltarBlock(BlockBehaviour.Properties.of(Material.GLASS).strength(3f).requiresCorrectToolForDrops()), ModCreativeModeTab.GNOME_TAB);
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
