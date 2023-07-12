@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.pecant.cultofthegnome.init.BlockEntityInit;
@@ -22,12 +23,9 @@ import net.pecant.cultofthegnome.screen.AltarMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class AltarBlockEntity extends RandomizableContainerBlockEntity {
+public class AltarBlockEntity extends RandomizableContainerBlockEntity implements ICapabilityProvider {
 
     private NonNullList<ItemStack> items = NonNullList.withSize(9, ItemStack.EMPTY);;
-
-
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
     public AltarBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityInit.ALTAR.get(), pos, state);
@@ -42,20 +40,10 @@ public class AltarBlockEntity extends RandomizableContainerBlockEntity {
         return Component.translatable("block.cultofthegnome.altar");
     }
 
-
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory) {
         return new AltarMenu(id, inventory, this);
-    }
-
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
-        }
-
-        return super.getCapability(cap, side);
     }
 
     @Override
@@ -79,16 +67,6 @@ public class AltarBlockEntity extends RandomizableContainerBlockEntity {
         this.items = items;
     }
 
-
-
-    @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        lazyItemHandler.invalidate();
-    }
-
-
-
     public void load(CompoundTag nbt) {
         super.load(nbt);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
@@ -105,8 +83,6 @@ public class AltarBlockEntity extends RandomizableContainerBlockEntity {
         }
 
     }
-
-
 
     public static <E extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, AltarBlockEntity entity) {
     }
