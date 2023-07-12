@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": {"model": "cultofthegnome:block/statue"}
+    "facing=south": {"model": "cultofthegnome:block/statue"},
+    "facing=west": {"model": "cultofthegnome:block/statue", "y": 90},
+    "facing=north": {"model": "cultofthegnome:block/statue", "y":  180},
+    "facing=east": {"model": "cultofthegnome:block/statue", "y":  270}
   }
 }
