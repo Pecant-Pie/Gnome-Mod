@@ -119,7 +119,6 @@ public class StatueBlock extends Block implements EntityBlock {
         // sets the gnome statue stuff within the if condition
         if (getGnomes(state) < MAX_GNOMES && gnome.setStatue(level.getBlockEntity(pos), pos))
         {
-            gnome.setId(getGnomes(state)); // sets the gnome id to the previous count
             level.setBlock(pos, state.setValue(GNOMES, getGnomes(state) + 1), 3);
             return true;
         }
