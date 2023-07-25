@@ -4,6 +4,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -28,7 +29,7 @@ public class BlockInit {
 
     // Altar
     public static final RegistryObject<AltarBlock> ALTAR = registerBlock("altar",
-            () -> new AltarBlock(BlockBehaviour.Properties.of(Material.GLASS).strength(3f).requiresCorrectToolForDrops()), ModCreativeModeTab.GNOME_TAB);
+            () -> new AltarBlock(BlockBehaviour.Properties.of(Material.GLASS).strength(3f).requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.GNOME_TAB);
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

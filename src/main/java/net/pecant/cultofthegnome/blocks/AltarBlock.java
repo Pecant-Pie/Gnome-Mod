@@ -17,7 +17,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import net.pecant.cultofthegnome.blockentities.AltarBlockEntity;
@@ -27,7 +29,10 @@ public class AltarBlock extends BaseEntityBlock {
 
     public AltarBlock(Properties properties) {super(properties);}
 
-    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
+    private static final VoxelShape BOTTOM_SHAPE = Block.box(0, 0, 0, 16, 8, 16);
+    private static final VoxelShape MID_SHAPE = Shapes.join(BOTTOM_SHAPE, Block.box(1,8,1, 15,12,15), BooleanOp.OR);
+    private static final VoxelShape FULL_SHAPE = Shapes.join(MID_SHAPE, Block.box(3,12,3, 13, 16, 13), BooleanOp.OR);
+    public static final VoxelShape SHAPE = Shapes.join(FULL_SHAPE, Block.box(4,14,4, 12,16,12), BooleanOp.ONLY_FIRST);
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
