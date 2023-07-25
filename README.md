@@ -3,20 +3,19 @@ A mod for minecraft that adds Gnome Cults!
 
 ## Current Features
 
-- Nice 3D Gnome Statue
-- Offering Altar
+- 3D Gnome Statue and Offering Altar
 - Gnome hat (item)
 - Recipes for all items/blocks.
-- Gnomes that you can spawn by right clicking the statue block with a hat (this makes you take 1 heart of magic damage).
-- The gnomes mine nearby ores and drop the items off above a nearby altar.
+- Gnomes that you can spawn by using a Gnome hat on the statue block (this makes you take 1 heart of magic damage).
+- Gnomes mine nearby ores and drop the items off in a nearby altar, dropping them above if it's full.
 - Gnomes are bound to their statue, and breaking the statue will kill all bound gnomes.
-- Each Statue may have a maximum of 5 gnomes bound it at once. If a gnome dies, another may be spawned at the altar in its place.
-- Gnomes get double the drops from mining ores. Note that this is less drops (on average) than mining with a fortune 3 pickaxe.
+- Each Statue may have a maximum of 5 gnomes bound to it at once. If a gnome dies, another may be spawned at the altar in its place.
+- Gnomes get double the drops from mining ores. Note that this is fewer drops (on average) than mining with a Fortune III pickaxe.
 
-## Planned Features for Initial Release
+## Planned Features for Next Update
 
-- Proper 3D assets for the altar.
-- The gnomes place their items directly into the altar's inventory.
+- Port to Minecraft 1.20
+- Balance changes (how far gnomes can search for ores and whatnot)
 
 ## Ideas for Further Development
 
